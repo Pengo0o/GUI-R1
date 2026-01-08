@@ -1,0 +1,57 @@
+### model
+model_name_or_path: /opt/data/private/hyp/models/Qwen/Qwen2.5-VL-3B-Instruct
+image_max_pixels: 1258291  
+# image_max_pixels: 12845056 
+# image_max_pixels: 50176
+video_max_pixels: 16384
+trust_remote_code: true
+
+
+deepspeed: examples/deepspeed/ds_z2_config.json  
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_rank: 8  # 更高的rank以提高GUI任务性能
+lora_alpha: 16  # alpha = 2 * rank
+lora_target: all  # 对所有线性层应用LoRA
+lora_dropout: 0.05
+freeze_vision_tower: false  # LoRA下可以不冻结视觉塔
+freeze_multi_modal_projector: false
+
+### dataset
+dataset: gui-r1-3k
+template: qwen2_vl
+cutoff_len: 3072 
+max_samples: 10000000
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: saves/qwen2_5_vl-3b/lora/gui_sft
+logging_steps: 10
+save_steps: 100
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: tensorboard
+
+### train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 4  # 8卡 * 1 * 4 = 32 有效batch size
+learning_rate: 1.0e-6  # LoRA通常使用更高的学习率
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+gradient_checkpointing: True
+resume_from_checkpoint: null
+
+### eval (可选，取消注释以启用验证)
+# val_size: 0.1
+# per_device_eval_batch_size: 1
+# eval_strategy: steps
+# eval_steps: 100
