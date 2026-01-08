@@ -47,13 +47,7 @@ Gui-Agent/
 │   ├── run_scripts/               # 训练脚本
 │   └── src/open-r1-multimodal/    # 核心代码
 ├── ms-swift/                      # MS-SWIFT 训练框架
-└── 1/                             # VERL GUI 训练实验
-    ├── examples/
-    │   ├── qwen2_5_vl_7b_gui_grpo.sh
-    │   └── baselines/
-    └── guir1/
-        ├── inference.sh
-        └── eval.sh
+
 ```
 
 ### 🚀 快速开始
@@ -426,13 +420,7 @@ Gui-Agent/
 │   ├── run_scripts/               # Training scripts
 │   └── src/open-r1-multimodal/    # Core code
 ├── ms-swift/                      # MS-SWIFT training framework
-└── 1/                             # VERL GUI training experiments
-    ├── examples/
-    │   ├── qwen2_5_vl_7b_gui_grpo.sh
-    │   └── baselines/
-    └── guir1/
-        ├── inference.sh
-        └── eval.sh
+
 ```
 
 ### 🚀 Quick Start
